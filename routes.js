@@ -1,13 +1,13 @@
 const router = require('koa-router')();
 const {
-  indexAction, newPostAction
+  indexAction, newPostAction, savePostAction
 } = require('./controllers/indexController');
 
 router
-  .get('/', indexAction)
-  .get('/post/new', newPostAction)
-// .get('/post/:id', show)
-// .post('/post', create)
+  .get('/', indexAction) // list all posts titles
+// .get('/post/:id', show) // show one post
+  .get('/post/new', newPostAction) // create new post
+.post('/post/save', savePostAction) // url to submit form
 ;
 
 module.exports = router.routes();

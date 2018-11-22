@@ -1,3 +1,15 @@
-Hello first form
-<form><input></form>
-
+<form action="/post/save" method="post">
+  <label>Title:
+    <input
+      type="text"
+      value=""
+      name="title"
+      placeholder="write post title"
+    >
+  </label>
+  <br>
+  <label>Post:
+    <textarea cols="25" rows="5" name="content"></textarea>
+  </label>
+  <input type="submit" value="submit post">
+</form>
