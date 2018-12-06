@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "initDB": "mysql -u root < ./ddl.sql",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js"
   },
@@ -15,6 +16,7 @@
     "koa-ejs": "^4.1.2",
     "koa-router": "^7.4.0",
     "lodash": "^4.17.11",
+    "mysql2": "^1.6.4",
     "path": "^0.12.7",
     "uniq-id": "^1.0.0"
   },

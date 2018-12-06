@@ -31,10 +31,10 @@ async function savePostAction(ctx) {
 async function viewPostAction(ctx) {
   // const { id } = ctx.request.query;
   const { id } = ctx.params;
-  ctx.body = posts[id];
+  let post = posts[id];
+  ctx.body = post;
+  await ctx.render('viewPost', { post, title: post.title });
 }
-
-
 
 module.exports = {
   indexAction,
