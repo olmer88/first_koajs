@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const generateId = require('uniq-id');
+const postsManager = require('../managers/postsManager');
 
 let posts = {
   1: { title: 'First post', content: 'Content from first post' },
@@ -7,6 +8,7 @@ let posts = {
 };
 
 async function indexAction(ctx) {
+  const posts = await postsManager.getAllPosts();
   const viewVariables = {
     posts,
     title: 'list posts',
@@ -31,8 +33,7 @@ async function savePostAction(ctx) {
 async function viewPostAction(ctx) {
   // const { id } = ctx.request.query;
   const { id } = ctx.params;
-  let post = posts[id];
-  ctx.body = post;
+  const [post] = await postsManager.getPostById(id);
   await ctx.render('viewPost', { post, title: post.title });
 }
 

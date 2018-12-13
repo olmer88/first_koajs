@@ -14,4 +14,7 @@ render(app, {
 
 app.use(routes);
 
-app.listen(3000);
+let port = 3000;
+app.listen(port, () => {
+  console.log(`http://localhost:${port}`);
+});
