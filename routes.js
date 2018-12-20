@@ -1,13 +1,13 @@
 const router = require('koa-router')();
 const {
-  indexAction, newPostAction, savePostAction, viewPostAction,
+  indexAction, addEditPostAction, savePostAction, viewPostAction,
 } = require('./controllers/indexController');
 
 router
   .get('/', indexAction) // list all posts titles
-  .get('/post/:id', viewPostAction) // show one post
-  .get('/post/new', newPostAction) // create new post
+  .get('/post/add-edit', addEditPostAction) // create new post
   .post('/post/save', savePostAction) // url to submit form
+  .get('/post/:id', viewPostAction) // show one post
   .all('**', async (ctx) => {
     ctx.body = 'Sorry can\'t find route';
   })

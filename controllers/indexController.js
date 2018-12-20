@@ -1,11 +1,5 @@
 const _ = require('lodash');
-const generateId = require('uniq-id');
 const postsManager = require('../managers/postsManager');
-
-let posts = {
-  1: { title: 'First post', content: 'Content from first post' },
-  2: { title: 'Second post', content: 'Content from second post' },
-};
 
 async function indexAction(ctx) {
   const posts = await postsManager.getAllPosts();
@@ -17,29 +11,27 @@ async function indexAction(ctx) {
   await ctx.render('index', viewVariables);
 }
 
-async function newPostAction(ctx) {
-  await ctx.render('newPost', { title: 'new post' });
+async function addEditPostAction(ctx) {
+  const { id } = ctx.request.query;
+  const post = await postsManager.getPostById(id);
+  await ctx.render('addEditPost', { title: 'new post', post, _ });
 }
 
 async function savePostAction(ctx) {
-  const { title, content } = ctx.request.body;
-  posts = {
-    ...posts,
-    [generateId()]: { title, content },
-  };
-  ctx.redirect('/');
+  const { id, title, content } = ctx.request.body;
+  postsManager.save({ id, title, content });
+  ctx.redirect(id ? `/post/${id}` : '/');
 }
 
 async function viewPostAction(ctx) {
-  // const { id } = ctx.request.query;
   const { id } = ctx.params;
-  const [post] = await postsManager.getPostById(id);
+  const post = await postsManager.getPostById(id);
   await ctx.render('viewPost', { post, title: post.title });
 }
 
 module.exports = {
   indexAction,
-  newPostAction,
+  addEditPostAction,
   savePostAction,
   viewPostAction,
 };

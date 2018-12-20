@@ -6,9 +6,9 @@ const connectionPromise = mysql.createConnection({
   database: 'firstKoajs'
 });
 
-async function execute(sql) {
+async function execute(sql, bindings) {
   const connection = await connectionPromise;
-  const [rows] = await connection.execute(sql);
+  const [rows] = await connection.execute(sql, bindings);
   return rows;
 }
 
